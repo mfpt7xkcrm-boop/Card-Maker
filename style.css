@@ -509,3 +509,69 @@ button:hover {
     #ff4d6d
   );
 }
+
+.save-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+
+  background: rgba(0, 0, 0, 0.85);
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding: 30px 15px;
+
+  overflow-y: auto;
+}
+
+.save-modal.hidden {
+  display: none;
+}
+
+.save-modal-box {
+  width: min(600px, 100%);
+
+  background: #1d2330;
+  color: white;
+
+  padding: 20px;
+
+  border-radius: 16px;
+
+  text-align: center;
+}
+
+.save-modal-box h2 {
+  margin-top: 0;
+}
+
+.save-modal-box p {
+  line-height: 1.6;
+}
+
+.save-modal-box img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  margin: 16px auto;
+
+  border-radius: 10px;
+}
+
+.save-modal-box button {
+  width: 100%;
+  padding: 14px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #4b78ff;
+  color: white;
+
+  font-size: 16px;
+  font-weight: bold;
+}
