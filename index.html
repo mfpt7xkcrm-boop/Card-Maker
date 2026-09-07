@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>カードメーカー</title>
+  <link rel="stylesheet" href="style.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css"
+  />
+</head>
+<body>
+  <div class="app">
+    <aside class="panel">
+      <h1>カードメーカー</h1>
+
+      <div class="control-group">
+        <label>カード名</label>
+        <input type="text" id="titleInput" value="カード名" />
+      </div>
+
+      <div class="grid-2">
+        <div class="control-group">
+          <label>タイトル文字サイズ</label>
+          <input type="range" id="titleSizeInput" min="20" max="42" value="28" />
+        </div>
+        <div class="control-group">
+          <label>星の数</label>
+          <input type="range" id="starCountInput" min="0" max="5" value="4" />
+          <div class="small-value" id="starCountLabel">4</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="control-group">
+          <label>文字の中の色</label>
+          <input type="color" id="titleFillInput" value="#ffffff" />
+        </div>
+        <div class="control-group">
+          <label>文字の外側の色</label>
+          <input type="color" id="titleStrokeInput" value="#000000" />
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="control-group">
+          <label>外枠テーマ</label>
+          <select id="frameInput">
+            <option value="blue">青</option>
+            <option value="red">赤</option>
+            <option value="green">緑</option>
+            <option value="purple">紫</option>
+            <option value="gold">金</option>
+            <option value="rainbow">虹</option>
+            <option value="dark">黒</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label>属性</label>
+          <select id="attributeInput">
+            <option value="none">属性なし</option>
+            <option value="fire">火</option>
+            <option value="water">水</option>
+            <option value="wind">風</option>
+            <option value="thunder">雷</option>
+            <option value="earth">土</option>
+            <option value="light">光</option>
+            <option value="dark">闇</option>
+            <option value="neutral">無属性</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label>中央画像</label>
+        <input type="file" id="imageInput" accept="image/*" />
+        <button id="openCropBtn" class="sub-btn" disabled>画像をトリミング</button>
+      </div>
+
+      <div class="control-group">
+        <label>説明文</label>
+        <textarea id="descInput" rows="7">■このカードの説明を書いてください。
+■改行もできます。</textarea>
+      </div>
+
+      <div class="control-group">
+        <label>説明文サイズ</label>
+        <input type="range" id="descSizeInput" min="14" max="30" value="18" />
+      </div>
+
+      <div class="button-row">
+        <button id="resetBtn">初期化</button>
+        <button id="downloadBtn" class="main-btn">PNG保存</button>
+      </div>
+    </aside>
+
+    <main class="preview-area">
+      <div class="preview-scale">
+        <div id="cardPreview" class="card theme-blue">
+          <div class="card-overlay"></div>
+
+          <div class="card-header">
+            <div id="cardTitle" class="card-title">カード名</div>
+            <div id="attributeBadge" class="attribute-badge hidden">
+              <span id="attributeSymbol">火</span>
+            </div>
+          </div>
+
+          <div id="starRow" class="star-row"></div>
+
+          <div class="art-frame">
+            <img id="artImage" alt="card art" />
+            <div id="artPlaceholder" class="art-placeholder">画像を選択</div>
+          </div>
+
+          <div class="text-box">
+            <div id="descText" class="desc-text">■このカードの説明を書いてください。<br>■改行もできます。</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- crop modal -->
+  <div id="cropModal" class="modal hidden">
+    <div class="modal-content">
+      <h2>画像をトリミング</h2>
+      <div class="crop-wrapper">
+        <img id="cropImage" alt="crop target" />
+      </div>
+      <div class="button-row">
+        <button id="cancelCropBtn">キャンセル</button>
+        <button id="applyCropBtn" class="main-btn">この範囲で決定</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
