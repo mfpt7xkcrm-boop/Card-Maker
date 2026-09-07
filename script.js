@@ -69,22 +69,82 @@ function makeTextStroke(color) {
   `;
 }
 
+function createStarImage(rainbow = false) {
+  const canvas = document.createElement("canvas");
+  canvas.width = 120;
+  canvas.height = 120;
+
+  const ctx = canvas.getContext("2d");
+
+  const cx = 60;
+  const cy = 60;
+  const outer = 50;
+  const inner = 23;
+
+  ctx.beginPath();
+
+  for (let i = 0; i < 10; i++) {
+    const radius = i % 2 === 0 ? outer : inner;
+    const angle = -Math.PI / 2 + i * Math.PI / 5;
+
+    const x = cx + Math.cos(angle) * radius;
+    const y = cy + Math.sin(angle) * radius;
+
+    if (i === 0) {
+      ctx.moveTo(x, y);
+    } else {
+      ctx.lineTo(x, y);
+    }
+  }
+
+  ctx.closePath();
+
+  if (rainbow) {
+    const gradient = ctx.createLinearGradient(10, 10, 110, 110);
+
+    gradient.addColorStop(0.00, "#ff4d6d");
+    gradient.addColorStop(0.18, "#ff9f43");
+    gradient.addColorStop(0.35, "#ffe66d");
+    gradient.addColorStop(0.52, "#58e68b");
+    gradient.addColorStop(0.68, "#4ddcff");
+    gradient.addColorStop(0.84, "#756cff");
+    gradient.addColorStop(1.00, "#df67ff");
+
+    ctx.fillStyle = gradient;
+  } else {
+    const gradient = ctx.createLinearGradient(20, 10, 90, 105);
+
+    gradient.addColorStop(0, "#fff59b");
+    gradient.addColorStop(0.45, "#ffd51f");
+    gradient.addColorStop(1, "#e7a500");
+
+    ctx.fillStyle = gradient;
+  }
+
+  ctx.fill();
+
+  ctx.lineWidth = 7;
+  ctx.strokeStyle = "#ffffff";
+  ctx.lineJoin = "round";
+  ctx.stroke();
+
+  return canvas.toDataURL("image/png");
+}
+
 function renderStars() {
   els.starRow.innerHTML = "";
 
+  const rainbow = state.starCount === 5;
+
   for (let i = 0; i < state.starCount; i++) {
-    const star = document.createElement("div");
+    const img = document.createElement("img");
 
-    if (state.starCount === 5) {
-      star.className = "star-shape rainbow-star";
-    } else {
-      star.className = "star-shape normal-star";
-    }
+    img.className = "star-image";
+    img.src = createStarImage(rainbow);
 
-    els.starRow.appendChild(star);
+    els.starRow.appendChild(img);
   }
 }
-
 function renderAttribute() {
   const badge = els.attributeBadge;
   badge.className = "attribute-badge";
