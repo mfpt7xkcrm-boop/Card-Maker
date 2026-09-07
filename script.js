@@ -221,55 +221,35 @@ function closeCropModal() {
 }
 
 async function downloadCard() {
-  const canvas = await html2canvas(els.cardPreview, {
-    backgroundColor: null,
-    scale: 2,
-    useCORS: true
-  });
+  try {
+    const card = els.cardPreview;
 
-  const imageUrl = canvas.toDataURL("image/png");
+    const canvas = await html2canvas(card, {
+      backgroundColor: null,
+      scale: 2,
+      useCORS: true,
+      allowTaint: true,
+      logging: false
+    });
 
-  const newWindow = window.open();
+    const imageUrl = canvas.toDataURL("image/png");
 
-  if (newWindow) {
-    newWindow.document.write(`
-      <!DOCTYPE html>
-      <html lang="ja">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>カード画像</title>
-        <style>
-          body {
-            margin: 0;
-            background: #111;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            color: white;
-            font-family: sans-serif;
-          }
+    const saveModal =
+      document.getElementById("saveModal");
 
-          p {
-            padding: 14px;
-            text-align: center;
-          }
+    const savedCardImage =
+      document.getElementById("savedCardImage");
 
-          img {
-            max-width: 95%;
-            height: auto;
-          }
-        </style>
-      </head>
+    savedCardImage.src = imageUrl;
 
-      <body>
-        <p>画像を長押しして「写真に保存」を選んでください。</p>
-        <img src="${imageUrl}">
-      </body>
-      </html>
-    `);
+    saveModal.classList.remove("hidden");
 
-    newWindow.document.close();
+  } catch (error) {
+    console.error(error);
+
+    alert(
+      "画像の作成に失敗しました。ページを再読み込みしてもう一度試してください。"
+    );
   }
 }
 
