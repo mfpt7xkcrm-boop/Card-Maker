@@ -372,3 +372,13 @@ els.resetBtn.addEventListener("click", () => {
 });
 
 updatePreview();
+
+document
+  .getElementById("closeSaveModal")
+  .addEventListener("click", () => {
+
+    document
+      .getElementById("saveModal")
+      .classList.add("hidden");
+
+  });
