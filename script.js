@@ -73,74 +73,15 @@ function renderStars() {
   els.starRow.innerHTML = "";
 
   for (let i = 0; i < state.starCount; i++) {
+    const star = document.createElement("div");
 
-    const rainbow = state.starCount === 5;
-
-    const svg = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "svg"
-    );
-
-    svg.setAttribute("viewBox", "0 0 100 100");
-    svg.setAttribute("class", "star-svg");
-
-    if (rainbow) {
-      svg.innerHTML = `
-        <defs>
-          <linearGradient id="rainbowStar${i}" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#ff3b30"/>
-            <stop offset="18%" stop-color="#ff9500"/>
-            <stop offset="35%" stop-color="#ffcc00"/>
-            <stop offset="52%" stop-color="#34c759"/>
-            <stop offset="68%" stop-color="#00b7ff"/>
-            <stop offset="84%" stop-color="#5856d6"/>
-            <stop offset="100%" stop-color="#af52de"/>
-          </linearGradient>
-        </defs>
-
-        <polygon
-          points="
-            50,5
-            61,36
-            95,36
-            67,56
-            78,90
-            50,70
-            22,90
-            33,56
-            5,36
-            39,36
-          "
-          fill="url(#rainbowStar${i})"
-          stroke="white"
-          stroke-width="4"
-          stroke-linejoin="round"
-        />
-      `;
+    if (state.starCount === 5) {
+      star.className = "star-shape rainbow-star";
     } else {
-      svg.innerHTML = `
-        <polygon
-          points="
-            50,5
-            61,36
-            95,36
-            67,56
-            78,90
-            50,70
-            22,90
-            33,56
-            5,36
-            39,36
-          "
-          fill="#f5cf3d"
-          stroke="white"
-          stroke-width="4"
-          stroke-linejoin="round"
-        />
-      `;
+      star.className = "star-shape normal-star";
     }
 
-    els.starRow.appendChild(svg);
+    els.starRow.appendChild(star);
   }
 }
 
