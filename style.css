@@ -449,3 +449,63 @@ button:hover {
   flex-shrink: 0;
   filter: drop-shadow(0 1px 1px rgba(0,0,0,0.35));
 }
+
+/* ===== 新しい星 ===== */
+
+.star-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.star-shape {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+
+  clip-path: polygon(
+    50% 0%,
+    61% 34%,
+    98% 35%,
+    68% 56%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 56%,
+    2% 35%,
+    39% 34%
+  );
+
+  filter:
+    drop-shadow(1px 0 0 white)
+    drop-shadow(-1px 0 0 white)
+    drop-shadow(0 1px 0 white)
+    drop-shadow(0 -1px 0 white)
+    drop-shadow(0 2px 2px rgba(0,0,0,0.35));
+}
+
+/* 星1～4 */
+.normal-star {
+  background: linear-gradient(
+    135deg,
+    #fff49a 0%,
+    #ffd900 45%,
+    #e9a900 100%
+  );
+}
+
+/* 星5 */
+.rainbow-star {
+  background: conic-gradient(
+    from 0deg,
+    #ff4d6d,
+    #ffb347,
+    #fff35c,
+    #63ff8b,
+    #55dfff,
+    #7884ff,
+    #d76cff,
+    #ff72c6,
+    #ff4d6d
+  );
+}
